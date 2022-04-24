@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path
-from main.views import rooms,rooms_added,bookings,bookings_added,payments,payments_added,api,index
+from main.views import rooms,rooms_added,bookings,bookings_added,payments,payments_added,api,index,invoice
 from django.conf.urls import url
 from django.conf.urls.static import static
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('payments/',payments,name="payments"),
     path('payments_added/',payments_added,name="payments_added"),
     path('api/<id>',api,name="api"),
+    path('invoice/<id>',invoice,name="invoice"),
 ]
 
 

@@ -3,7 +3,7 @@ from django.http import HttpResponse,JsonResponse
 from django.db import connection
 from .forms import RoomForm,RoombookingsForm,PaymentsForm
 from datetime import date
-from .models import Rooms, Roombookings
+from .models import Rooms, Roombookings, Payments
 # Create your views here.
 
 
@@ -52,7 +52,8 @@ def payments(request):
             # roomtype = room_form.cleaned_data['Room Type']
             # roomcapacity = room_form.cleaned_data['Room Capacity']
             form.save()
-            return redirect('/payments_added/')
+            b_id = form.cleaned_data['bookingid']
+            return redirect('/invoice/'+str(b_id))
     return render(request,'files/payments.html',{'form': PaymentsForm()})
 
 def payments_added(request):
@@ -85,4 +86,8 @@ def api(request,id):
     return JsonResponse(context)
 
 
-
+def invoice(request,id):
+    obj_1 = Roombookings.objects.filter(customername__icontains=id)
+    obj_2 = Payments.objects.filter(bookingid__customername__icontains=id)
+    context = {'obj_1':obj_1,'obj_2': obj_2}
+    return render(request,"files/invoice.html",context)
