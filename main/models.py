@@ -15,6 +15,11 @@ class Payments(models.Model):
         managed = False
         db_table = 'payments'
 
+    def __str__(self):
+        return str(self.bookingid)
+
+
+
 
 class Roombookings(models.Model):
     bookingid = models.IntegerField(primary_key=True)
@@ -29,6 +34,9 @@ class Roombookings(models.Model):
         managed = False
         db_table = 'roombookings'
 
+    def __str__(self):
+        return str(self.customername)
+
 
 class Rooms(models.Model):
     roomid = models.IntegerField(primary_key=True)
@@ -40,4 +48,7 @@ class Rooms(models.Model):
     class Meta:
         managed = False
         db_table = 'rooms'
+
+    def __str__(self):
+        return str(self.roomnumber)
 
